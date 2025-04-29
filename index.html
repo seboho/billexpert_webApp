@@ -1,22 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>BillExpert</title>
-    <style>
-      html, body {
-        margin: 0;
-        height: 100%;
-        overflow: hidden;
+<head>
+  <meta charset="UTF-8">
+  <title>BillExpert</title>
+  
+  <!-- Bootstrap spinner styles -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #fff; /* Bijela pozadina */
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .loading-spinner {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .spinner-border {
+      width: 5rem;
+      height: 5rem;
+      border-width: 0.5rem;
+      color: #007bff; /* Plava boja spinnera */
+    }
+
+    .loading-text {
+      margin-top: 15px;
+      font-size: 2rem;
+      color: #333;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Loading Spinner -->
+  <div id="loadingSpinner" class="loading-spinner">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div class="loading-text">Loading...</div>
+  </div>
+
+  <!-- Your iframe -->
+  <iframe id="webApp" onload="hideLoader()" src="https://script.google.com/macros/s/AKfycbwnMW5ZFldsSGZ00YeSMURv4sULx0ojKrYzn9_f8iA9EOxrpDzAPYNj7pfcIejiR8Vb6Q/exec"></iframe>
+
+  <script>
+    function hideLoader() {
+      const loader = document.getElementById('loadingSpinner');
+      if (loader) {
+        loader.style.opacity = '0'; // fade out efekt
+        setTimeout(() => {
+          loader.style.display = 'none'; // sakrij loader nakon fadeout-a
+        }, 500); // isto kao u CSS transition
       }
-      iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-      }
-    </style>
-  </head>
-  <body>
-    <iframe id="webApp" src="https://script.google.com/macros/s/AKfycbwnMW5ZFldsSGZ00YeSMURv4sULx0ojKrYzn9_f8iA9EOxrpDzAPYNj7pfcIejiR8Vb6Q/exec"></iframe>
-  </body>
+    }
+  </script>
+
+</body>
 </html>
