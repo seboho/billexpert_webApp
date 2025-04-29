@@ -19,11 +19,4 @@
   <body>
     <iframe id="webApp" src="https://script.google.com/macros/s/AKfycbwnMW5ZFldsSGZ00YeSMURv4sULx0ojKrYzn9_f8iA9EOxrpDzAPYNj7pfcIejiR8Vb6Q/exec"></iframe>
   </body>
-  <script>
-  window.addEventListener('message', function(event) {
-    if (event.data.updateIframeSrc) {
-      document.getElementById('webApp').src = event.data.updateIframeSrc;
-    }
-  });
-  </script>
 </html>
