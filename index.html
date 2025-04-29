@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>BillExpert</title>
-  <style>
-    html, body {
-      margin: 0;
-      height: 100%;
-      overflow: hidden;
+  <head>
+    <meta charset="UTF-8">
+    <title>BillExpert</title>
+    <style>
+      html, body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="webApp" src="https://script.google.com/macros/s/AKfycbwnMW5ZFldsSGZ00YeSMURv4sULx0ojKrYzn9_f8iA9EOxrpDzAPYNj7pfcIejiR8Vb6Q/exec"></iframe>
+  </body>
+  <script>
+  window.addEventListener('message', function(event) {
+    if (event.data.updateIframeSrc) {
+      document.getElementById('webApp').src = event.data.updateIframeSrc;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-  </style>
-</head>
-<body>
-  <iframe src="https://script.google.com/macros/s/AKfycbwnMW5ZFldsSGZ00YeSMURv4sULx0ojKrYzn9_f8iA9EOxrpDzAPYNj7pfcIejiR8Vb6Q/exec"></iframe>
-</body>
+  });
+  </script>
 </html>
