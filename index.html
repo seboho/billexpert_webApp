@@ -66,6 +66,35 @@
   <iframe id="webApp" onload="hideLoader()" src="https://script.google.com/macros/s/AKfycbwnMW5ZFldsSGZ00YeSMURv4sULx0ojKrYzn9_f8iA9EOxrpDzAPYNj7pfcIejiR8Vb6Q/exec"></iframe>
 
   <script>
+    window.addEventListener('message', event => {
+      // 1) origin check for security
+      // only accept messages from your GAS iframe
+      const origin = event.origin;
+      const fromGAS  = /\.googleusercontent\.com$/.test(origin);
+      if (!fromGAS) {
+        console.warn('Discarding message from', origin);
+        alert('Not allowed!');
+        return;
+      }
+      
+
+      const { action, sessionId, appLink } = event.data || {};
+      if (action !== 'reloadApp') return;
+
+      const iframe = document.getElementById('webApp');
+      if (sessionId) {
+        console.log('Got session id:', sessionId);
+        // 1) reload with ?id=…
+        iframe.src = iframe.src.split('?')[0]
+                      + '?id=' 
+                      + encodeURIComponent(sessionId);
+      } else if (appLink) {
+        // 2) fallback to the appLink
+        iframe.src = appLink;
+      }
+    });
+
+
     function hideLoader() {
       const loader = document.getElementById('loadingSpinner');
       if (loader) {
